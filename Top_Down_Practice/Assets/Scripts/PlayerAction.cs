@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
+    public float speed;
     float h;
     float v;
 
@@ -23,6 +24,6 @@ public class PlayerAction : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigid.velocity = new Vector2(h, v);    
+        rigid.velocity = new Vector2(h, v) * speed;    
     }
 }

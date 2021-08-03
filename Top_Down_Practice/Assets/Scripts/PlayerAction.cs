@@ -4,13 +4,29 @@ using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
+    // character move speed
     public float speed;
+    
+    // Axis X
     float h;
+
+    // Axis Y
     float v;
+    
+    // 수직 수평 키의 동시 입력을 방지
     bool isHorizonMove;
+    
+    // Rigid Body
     Rigidbody2D rigid;
+    
+    // Animator set
     Animator anim;
 
+    // normal vector
+    Vector3 dirVec;
+
+    // for scan object
+    GameObject scan_object;
 
     void Awake()
     {
@@ -53,12 +69,37 @@ public class PlayerAction : MonoBehaviour
         else
             anim.SetBool("isChange", false);
 
+
+        // Direction
+        if (vDown && v == 1)
+            dirVec = Vector3.up;
+        else if (vDown && v == -1)
+            dirVec = Vector3.down;
+        else if (hDown && h == -1)
+            dirVec = Vector3.left;
+        else if (hDown && h == 1)
+            dirVec = Vector3.right;
+
+        //Scan object
+        if (Input.GetButtonDown("Jump") && scan_object != null)
+            Debug.Log("This is " + scan_object.name);
+
     }
 
     void FixedUpdate()
     {
         // Move
         Vector2 moveVec = isHorizonMove ? new Vector2(h, 0) : new Vector2(0, v);
-        rigid.velocity = moveVec * speed;    
+        rigid.velocity = moveVec * speed;
+
+        //Ray
+        Debug.DrawRay(rigid.position, dirVec * 0.7f, new Color(0, 1, 0)); // 현재 위치에서, 해당 방향으로, 해당 색깔로 레이저를 그린다.
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, dirVec, 0.7f, LayerMask.GetMask("Object"));
+
+        if (rayHit.collider != null)
+            scan_object = rayHit.collider.gameObject;
+         
+        else
+            scan_object = null;
     }
 }

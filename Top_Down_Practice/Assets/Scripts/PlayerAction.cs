@@ -7,6 +7,9 @@ public class PlayerAction : MonoBehaviour
     // character move speed
     public float speed;
     
+    // game manager
+    public GameManager manager;
+
     // Axis X
     float h;
 
@@ -82,7 +85,7 @@ public class PlayerAction : MonoBehaviour
 
         //Scan object
         if (Input.GetButtonDown("Jump") && scan_object != null)
-            Debug.Log("This is " + scan_object.name);
+            manager.Action(scan_object);
 
     }
 

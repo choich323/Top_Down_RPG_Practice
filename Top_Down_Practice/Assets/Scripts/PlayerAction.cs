@@ -41,14 +41,14 @@ public class PlayerAction : MonoBehaviour
     void Update()
     {
         // Move value
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
+        h = manager.isAction ? 0 : Input.GetAxisRaw("Horizontal");
+        v = manager.isAction ? 0 : Input.GetAxisRaw("Vertical");
 
         // Check button down & up
-        bool hDown = Input.GetButtonDown("Horizontal");
-        bool vDown = Input.GetButtonDown("Vertical");
-        bool hUp = Input.GetButtonUp("Horizontal");
-        bool vUp = Input.GetButtonUp("Vertical");
+        bool hDown = manager.isAction ? false : Input.GetButtonDown("Horizontal");
+        bool vDown = manager.isAction ? false : Input.GetButtonDown("Vertical");
+        bool hUp = manager.isAction ? false : Input.GetButtonUp("Horizontal");
+        bool vUp = manager.isAction ? false : Input.GetButtonUp("Vertical");
 
         // Check horizontal move
         if (hDown)
@@ -83,7 +83,7 @@ public class PlayerAction : MonoBehaviour
         else if (hDown && h == 1)
             dirVec = Vector3.right;
 
-        //Scan object
+        //Scan Object & Action
         if (Input.GetButtonDown("Jump") && scan_object != null)
             manager.Action(scan_object);
 

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public TalkManager talkManager;
     public GameObject talkPanel;
+    public Image portraitImg;
     public Text talkText;
     public GameObject scan_object;
     public int talkIndex;
@@ -38,11 +39,16 @@ public class GameManager : MonoBehaviour
 
         if (isNPC)
         {
-            talkText.text = talkData;
+            talkText.text = talkData.Split(':')[0];
+
+            portraitImg.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1])); // Parse: 문자열을 해당 타입으로 변환시켜줌 - 단, 숫자 텍스트만 가능함
+            portraitImg.color = new Color(1, 1, 1, 1);
         }
         else
         {
             talkText.text = talkData;
+
+            portraitImg.color = new Color(1, 1, 1, 0);
         }
 
         isAction = true;

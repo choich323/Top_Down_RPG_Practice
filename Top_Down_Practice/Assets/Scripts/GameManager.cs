@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         {
             isAction = false;
             talkIndex = 0;
-            questManager.CheckQuest();
+            Debug.Log(questManager.CheckQuest(id));
             return;
         }
         // Continue talk

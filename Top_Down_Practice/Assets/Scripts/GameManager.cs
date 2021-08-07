@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
     public GameObject scan_object;
     public int talkIndex;
 
+    void Start()
+    {
+        Debug.Log(questManager.CheckQuest()); // 매개변수가 있는가 없는가에 따라 다른 함수 실행(오버로드)
+    }
+
     // 현재 액션 실행중인가
     public bool isAction;
 

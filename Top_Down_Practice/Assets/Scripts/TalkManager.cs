@@ -54,23 +54,9 @@ public class TalkManager : MonoBehaviour
         if (!talkData.ContainsKey(id)) // dictionary에 key가 있는지 검사
         {
             if (!talkData.ContainsKey(id - id % 10))
-            {
-                // 퀘스트 맨 처음 대사조차 없을 때
-                // 기본 대사를 가지고 온다.
-                if (talkIndex == talkData[id - id % 100].Length)
-                    return null;
-                else
-                    return talkData[id - id % 100][talkIndex];
-            }
+                return GetTalk(id - id % 100, talkIndex); // Get First Talk
             else
-            {
-                // 해당 퀘스트 진행 순서 대사가 없을 때
-                // 퀘스트 맨 처음 대사를 가지고 온다.
-                if (talkIndex == talkData[id - id % 10].Length)
-                    return null;
-                else
-                    return talkData[id - id % 10][talkIndex];
-            }
+                return GetTalk(id - id % 10, talkIndex); // Get First Quest Talk
         }
 
         if (talkIndex == talkData[id].Length)

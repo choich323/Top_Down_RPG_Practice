@@ -45,6 +45,11 @@ public class QuestManager : MonoBehaviour
         return questList[questId].questName; // 퀘스트 이름 출력
     }
 
+    public string CheckQuest()
+    {
+        return questList[questId].questName; // 퀘스트 이름 출력
+    }
+
     void NextQuest()
     {
         questId += 10;

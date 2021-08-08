@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public TalkManager talkManager;
     public QuestManager questManager;
-    public GameObject talkPanel;
+    public Animator talkPanel;
     public Image portraitImg;
     public Text talkText;
     public GameObject scan_object;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         ObjData objData = scan_object.GetComponent<ObjData>();
         Talk(objData.id, objData.isNPC);
 
-        talkPanel.SetActive(isAction);  // 액션키를 누르면 대화창을 활성화
+        talkPanel.SetBool("isShow", isAction);  // 액션키를 누르면 대화창을 활성화
     }
 
     void Talk(int id, bool isNPC)

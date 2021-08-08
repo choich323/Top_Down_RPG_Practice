@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public QuestManager questManager;
     public Animator talkPanel;
     public Image portraitImg;
+    public Animator portraitAnim;
+    public Sprite prevPortrait;
     public Text talkText;
     public GameObject scan_object;
     public int talkIndex;
@@ -54,6 +56,12 @@ public class GameManager : MonoBehaviour
 
             portraitImg.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1])); // Parse: 문자열을 해당 타입으로 변환시켜줌 - 단, 숫자 텍스트만 가능함
             portraitImg.color = new Color(1, 1, 1, 1);
+
+            if (prevPortrait != portraitImg.sprite)
+            {
+                portraitAnim.SetTrigger("doEffect");
+                prevPortrait = portraitImg.sprite;
+            }
         }
         else
         {

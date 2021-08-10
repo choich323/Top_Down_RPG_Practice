@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public Image portraitImg;
     public Animator portraitAnim;
     public Sprite prevPortrait;
-    public Text talkText;
+    public TypeEffect talk;
     public GameObject scan_object;
     public int talkIndex;
 
@@ -37,9 +37,19 @@ public class GameManager : MonoBehaviour
     void Talk(int id, bool isNPC)
     {
         // Set talk data
-        int questTalkIndex = questManager.GetQuestTalkIndex(id);
-        string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
-        
+        int questTalkIndex = 0;
+        string talkData = "";
+
+        if (talk.isAnim) 
+        { 
+            talk.SetMsg("");
+            return;
+        }
+        else
+        {
+            questTalkIndex = questManager.GetQuestTalkIndex(id);
+            talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
+        }
 
         // End talk
         if(talkData == null)
@@ -52,7 +62,7 @@ public class GameManager : MonoBehaviour
         // Continue talk
         if (isNPC)
         {
-            talkText.text = talkData.Split(':')[0];
+            talk.SetMsg(talkData.Split(':')[0]);
 
             portraitImg.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1])); // Parse: 문자열을 해당 타입으로 변환시켜줌 - 단, 숫자 텍스트만 가능함
             portraitImg.color = new Color(1, 1, 1, 1);
@@ -65,7 +75,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            talkText.text = talkData;
+            talk.SetMsg(talkData);
 
             portraitImg.color = new Color(1, 1, 1, 0);
         }

@@ -12,16 +12,29 @@ public class GameManager : MonoBehaviour
     public Animator portraitAnim;
     public Sprite prevPortrait;
     public TypeEffect talk;
+    public GameObject menuSet;
     public GameObject scan_object;
     public int talkIndex;
+
+    // 현재 액션 실행중인가
+    public bool isAction;
 
     void Start()
     {
         Debug.Log(questManager.CheckQuest()); // 매개변수가 있는가 없는가에 따라 다른 함수 실행(오버로드)
     }
 
-    // 현재 액션 실행중인가
-    public bool isAction;
+    void Update()
+    {
+        // Sub Menu
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (menuSet.activeSelf)
+                menuSet.SetActive(false);
+            else
+                menuSet.SetActive(true);
+        }
+    }
 
     // Update is called once per frame
     public void Action(GameObject scanObj)

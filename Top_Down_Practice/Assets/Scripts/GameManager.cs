@@ -97,4 +97,9 @@ public class GameManager : MonoBehaviour
         isAction = true;
         talkIndex++;
     }
+
+    public void GameExit()
+    {
+        Application.Quit();
+    }
 }

@@ -31267,6 +31267,7 @@ MonoBehaviour:
   portraitAnim: {fileID: 1417248299}
   prevPortrait: {fileID: 0}
   talk: {fileID: 2074480373}
+  questText: {fileID: 2061987578}
   menuSet: {fileID: 1589907808}
   scan_object: {fileID: 0}
   talkIndex: 0
@@ -31931,7 +31932,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1590830929}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1590830929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34388,7 +34400,7 @@ GameObject:
   - component: {fileID: 2061987579}
   - component: {fileID: 2061987578}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Quest Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

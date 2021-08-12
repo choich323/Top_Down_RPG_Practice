@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Animator portraitAnim;
     public Sprite prevPortrait;
     public TypeEffect talk;
+    public Text questText;
     public GameObject menuSet;
     public GameObject scan_object;
     public int talkIndex;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(questManager.CheckQuest()); // 매개변수가 있는가 없는가에 따라 다른 함수 실행(오버로드)
+        questText.text = questManager.CheckQuest();
     }
 
     void Update()
@@ -69,7 +70,7 @@ public class GameManager : MonoBehaviour
         {
             isAction = false;
             talkIndex = 0;
-            Debug.Log(questManager.CheckQuest(id));
+            questText.text = questManager.CheckQuest(id);
             return;
         }
         // Continue talk

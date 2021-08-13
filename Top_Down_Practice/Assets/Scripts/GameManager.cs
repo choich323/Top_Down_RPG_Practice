@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Text questText;
     public GameObject menuSet;
     public GameObject scan_object;
+    public GameObject player;
     public int talkIndex;
 
     // 현재 액션 실행중인가
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        GameLoad();
         questText.text = questManager.CheckQuest();
     }
 
@@ -96,6 +98,34 @@ public class GameManager : MonoBehaviour
 
         isAction = true;
         talkIndex++;
+    }
+
+    public void GameSave()
+    {
+        // 퀘스트 정보와 인덱스, 플레이어의 위치 저장(PlayerPrefs 활용)
+        PlayerPrefs.SetFloat("PlayerX", player.transform.position.x);
+        PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
+        PlayerPrefs.SetFloat("QustId", questManager.questId);
+        PlayerPrefs.SetFloat("QustActionIndex", questManager.questActionIndex);
+        PlayerPrefs.Save();
+
+        menuSet.SetActive(false);
+    }
+
+    public void GameLoad()
+    {
+        if (!PlayerPrefs.HasKey("PlayerX")) // 한 번도 세이브한 적이 없으면 로드하지 않기
+            return;
+
+        float x = PlayerPrefs.GetFloat("PlayerX");
+        float y = PlayerPrefs.GetFloat("PlayerY");
+        int questId = PlayerPrefs.GetInt("QustId");
+        int questActionIndex = PlayerPrefs.GetInt("QustActionIndex");
+
+        player.transform.position = new Vector3(x, y, 0);
+        questManager.questId = questId;
+        questManager.questActionIndex = questActionIndex;
+        questManager.ControlObject();
     }
 
     public void GameExit()

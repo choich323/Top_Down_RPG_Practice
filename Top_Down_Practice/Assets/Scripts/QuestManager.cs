@@ -15,6 +15,7 @@ public class QuestManager : MonoBehaviour
         GenerateData();
     }
 
+    // Update is called once per frame
     void GenerateData()
     {
         questList.Add(10, new QuestData("마을 사람들과 대화하기", new int[] { 1000, 2000 }));
@@ -65,10 +66,10 @@ public class QuestManager : MonoBehaviour
                     questObject[0].SetActive(true);
                 break;
             case 20:
-                if (questActionIndex == 0)
-                    questObject[0].SetActive(true);
-                else if (questActionIndex == 1)
+                if (questActionIndex == 1)
                     questObject[0].SetActive(false);
+                else if (questActionIndex == 0)
+                    questObject[0].SetActive(true);
                 break;
         }
     }

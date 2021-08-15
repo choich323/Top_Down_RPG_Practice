@@ -119,8 +119,8 @@ public class GameManager : MonoBehaviour
 
         float x = PlayerPrefs.GetFloat("PlayerX");
         float y = PlayerPrefs.GetFloat("PlayerY");
-        int questId = PlayerPrefs.GetInt("QustId");
-        int questActionIndex = PlayerPrefs.GetInt("QustActionIndex");
+        int questId = (int)PlayerPrefs.GetFloat("QustId");
+        int questActionIndex = (int)PlayerPrefs.GetFloat("QustActionIndex");
 
         player.transform.position = new Vector3(x, y, 0);
         questManager.questId = questId;

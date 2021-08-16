@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Sprite prevPortrait;
     public TypeEffect talk;
     public Text questText;
+    public Text npcName;
     public GameObject menuSet;
     public GameObject scan_object;
     public GameObject player;
@@ -45,12 +46,12 @@ public class GameManager : MonoBehaviour
         isAction = true;
         scan_object = scanObj;
         ObjData objData = scan_object.GetComponent<ObjData>();
-        Talk(objData.id, objData.isNPC);
+        Talk(objData.id, objData.isNPC, objData.nameData);
 
         talkPanel.SetBool("isShow", isAction);  // 액션키를 누르면 대화창을 활성화
     }
 
-    void Talk(int id, bool isNPC)
+    void Talk(int id, bool isNPC, string objName)
     {
         // Set talk data
         int questTalkIndex = 0;
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
         // Continue talk
         if (isNPC)
         {
+            npcName.text = objName;
             talk.SetMsg(talkData.Split(':')[0]);
 
             portraitImg.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1])); // Parse: 문자열을 해당 타입으로 변환시켜줌 - 단, 숫자 텍스트만 가능함
@@ -91,6 +93,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            npcName.text = "";
             talk.SetMsg(talkData);
 
             portraitImg.color = new Color(1, 1, 1, 0);
